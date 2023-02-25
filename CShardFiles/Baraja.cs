@@ -2,16 +2,21 @@ using System;
 using System.Collections.Generic;
 public class Baraja
 {
-    List<Carta> orden;
+    List<Carta> Cartas;
     public Baraja() //Crea una baraja ordenada 
     {
         for (int a = 1; a<52; a++)
         {
-            orden.Add(new Carta(a));
+            Cartas.Add(new Carta(a));
         }
     }
 
-    public void mezclar()
+    public static Baraja getRandom() //Crea y devuelve una baraja randomizada
+    {
+        return new Baraja().mezclar();
+    }
+
+    public Baraja mezclar()
     {
         int a;
         int b;
@@ -28,11 +33,23 @@ public class Baraja
             b = r.Next(0, 53);
             } while (b > 52 || b < 1);
             
-            Carta temp = this.orden[a];
-            this.orden[a] = this.orden[b];
-            this.orden[b] = temp;
+            Carta temp = this.Cartas[a];
+            this.Cartas[a] = this.Cartas[b];
+            this.Cartas[b] = temp;
             }
 
+        return this;
+
         
+    }
+
+    public List<Carta> getPrimerasCartas(int num)
+    {
+        List<Carta> cartasReturn = new List<Carta>();
+        for (int i = 0; i<num; i++)
+        {
+            cartasReturn.Add(Cartas[i]);
+        }
+        return cartasReturn;
     }
 }

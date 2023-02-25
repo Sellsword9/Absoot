@@ -5,29 +5,44 @@ using UnityEngine;
 public class Jugador : CartaContainer
 {
     public Carta[] cartasEnMano;
-    public Carta[] cartasEnMesa;
+    public List<Carta> cartasEnMesa; //Por conveniencia cada jugador guarda también las cartas globales de la mesa
 
      public int Stock;
 
 
-    public Jugador(int dinero, Carta[] mesa)
+    public Jugador(int dinero, Carta[] mano ,List<Carta> mesa)
     {
-        this.Stock = dinero;
         this.cartasEnMesa = mesa;
+        this.cartasEnMano = mano;
+        this.Stock        = dinero;
     }
 
-    public Carta CartaDefinir()
+    public override Carta CartaDefinir()
     {
         throw new System.NotImplementedException();
     }
 
-    public int CartaMasAlta()
+    public override int CartaMasAlta()
     {
         throw new System.NotImplementedException();
     }
 
-    public Mano mejorMano()
+    public override Mano mejorMano()
     {
         throw new System.NotImplementedException();
+    }
+
+    public override List<Carta> totalCartas()
+    {
+        List<Carta> totalCartas = new List<Carta>();
+        foreach (Carta c in cartasEnMesa)
+        {
+            totalCartas.Add(c);
+        }
+        foreach (Carta c in cartasEnMano)
+        {
+            totalCartas.Add(c);
+        }
+        return totalCartas;
     }
 }
